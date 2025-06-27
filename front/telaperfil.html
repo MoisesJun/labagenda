@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Perfil - LabAgenda</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilos.css">
+  <style>
+    /* Estilo do perfil */
+    .perfil-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .avatar {
+      width: 120px;
+      height: 120px;
+      background: #6b4c9a;
+      border-radius: 50%;
+      margin: 0 auto 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 48px;
+    }
+
+    .perfil-info {
+      background: #f8f9fa;
+      border: 1px solid #e9ecef;
+      border-radius: 13px;
+      padding: 23px;
+      margin-bottom: 20px;
+    }
+
+    .info-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+      color: #333;
+      font-size: 16px;
+    }
+
+    .info-item strong {
+      min-width: 120px;
+      color: #6b4c9a;
+      font-weight: 600;
+    }
+
+    .acoes {
+      display: flex;
+      gap: 15px;
+      margin-top: 30px;
+    }
+
+    .btn {
+      flex: 1;
+      padding: 15px;
+      border: none;
+      border-radius: 13px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .btn-editar {
+      background: #6b4c9a;
+      color: white;
+    }
+
+    .btn-sair {
+      background: #dc3545;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <!-- Menu lateral -->
+  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+  <div class="sidebar" id="sidebar">
+    <h3>Menu</h3>
+    <a href="telaagendamento.html">📅 Reservar Sala</a>
+    <a href="telabusca.html">🔍 Buscar Salas</a>
+    <a href="meusagendamentos.html">📋 Registro</a>
+    <a href="telasuporte.html">💬 Suporte</a>
+  </div>
+
+  <!-- Conteúdo da página -->
+  <div class="container">
+    <h2>Meu Perfil</h2>
+
+    <div class="perfil-header">
+      <div class="avatar">👤</div>
+      <h3>Usuário Teste</h3>
+      <p>Aluno</p>
+    </div>
+
+    <div class="perfil-info">
+      <div class="info-item">
+        <strong>CPF:</strong>
+        <span>123.456.789-00</span>
+      </div>
+      <div class="info-item">
+        <strong>Nome:</strong>
+        <span>Usuário Teste</span>
+      </div>
+      <div class="info-item">
+        <strong>Tipo:</strong>
+        <span>Aluno</span>
+      </div>
+    </div>
+
+    <div class="acoes">
+      <button class="btn btn-sair" onclick="sair()">Sair</button>
+    </div>
+  </div>
+
+  <script>
+    // Função do menu
+    function toggleMenu() {
+      const sidebar = document.getElementById('sidebar');
+      sidebar.classList.toggle('active');
+    }
+
+    // Função pra sair
+    function sair() {
+      if (confirm('Tem certeza que quer sair?')) {
+        window.location.href = "telalogin.html";
+      }
+    }
+  </script>
+</body>
+</html>

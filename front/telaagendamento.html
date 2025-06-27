@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Agendamento - LabAgenda</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilos.css">
+  <style>
+    /* Estilo do select */
+    select {
+      appearance: none;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b4c9a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 15px center;
+      background-size: 15px;
+      padding-right: 40px;
+    }
+
+    .container {
+      max-width: 450px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Menu lateral -->
+  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+  <div class="sidebar" id="sidebar">
+    <h3>Menu</h3>
+    <a href="telabusca.html">🔍 Buscar Salas</a>
+    <a href="telaperfil.html">👤 Perfil</a>
+    <a href="meusagendamentos.html">📋 Registro</a>
+    <a href="telasuporte.html">💬 Suporte</a>
+  </div>
+
+  <!-- Conteúdo da página -->
+  <div class="container">
+    <h2>Agendamento</h2>
+
+    <form id="agendamentoForm">
+      <div>
+        <label for="sala">Sala/Laboratório</label>
+        <select id="sala">
+          <option value="">Escolha uma sala...</option>
+          <option value="Lab 1 - Informática">Lab 1 - Informática</option>
+          <option value="Lab 2 - Química">Lab 2 - Química</option>
+          <option value="Sala 101 - Teoria">Sala 101 - Teoria</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="data">Data</label>
+        <input type="date" id="data">
+      </div>
+
+      <div>
+        <label for="horario">Horário de Início</label>
+        <select id="horario">
+          <option value="">Escolha um horário...</option>
+          <option value="08:00">08:00</option>
+          <option value="10:00">10:00</option>
+          <option value="14:00">14:00</option>
+          <option value="16:00">16:00</option>
+          <option value="18:00">18:00</option>
+        </select>
+      </div>
+
+      <button type="submit">Agendar Sala</button>
+    </form>
+
+    <div id="mensagem" class="msg"></div>
+  </div>
+
+  <script>
+    // Função do menu
+    function toggleMenu() {
+      const sidebar = document.getElementById('sidebar');
+      sidebar.classList.toggle('active');
+    }
+
+    // Configura a data (só permite datas futuras)
+    window.addEventListener("DOMContentLoaded", function() {
+      const inputData = document.getElementById("data");
+      const hoje = new Date();
+      
+      const ano = hoje.getFullYear();
+      const mes = String(hoje.getMonth() + 1).padStart(2, '0');
+      const dia = String(hoje.getDate()).padStart(2, '0');
+      
+      inputData.min = `${ano}-${mes}-${dia}`;
+      inputData.max = `${ano}-12-31`;
+    });
+
+    // Função de agendamento
+    document.getElementById('agendamentoForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const sala = document.getElementById("sala").value;
+      const data = document.getElementById("data").value;
+      const horario = document.getElementById("horario").value;
+      const mensagem = document.getElementById("mensagem");
+
+      // Verifica se preencheu tudo
+      if (!sala || !data || !horario) {
+        mensagem.textContent = "Preencha todos os campos!";
+        mensagem.className = "msg erro";
+        mensagem.style.display = "block";
+        return;
+      }
+
+      // Calcula o horário de fim (2h depois)
+      const [hora, minuto] = horario.split(':');
+      const horarioFim = new Date();
+      horarioFim.setHours(parseInt(hora) + 2);
+      horarioFim.setMinutes(parseInt(minuto));
+      
+      const horarioFimFormatado = `${String(horarioFim.getHours()).padStart(2, '0')}:${String(horarioFim.getMinutes()).padStart(2, '0')}`;
+      const [ano, mes, dia] = data.split("-");
+      
+      // Mostra mensagem de sucesso
+      mensagem.className = "msg sucesso";
+      mensagem.textContent = `Reserva feita para ${sala} em ${dia}/${mes}/${ano} das ${horario} às ${horarioFimFormatado}.`;
+      mensagem.style.display = "block";
+
+      // Limpa o formulário
+      document.getElementById("sala").value = "";
+      document.getElementById("data").value = "";
+      document.getElementById("horario").value = "";
+    });
+
+
+  </script>
+</body>
+</html>

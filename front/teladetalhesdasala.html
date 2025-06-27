@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Detalhes da Sala - LabAgenda</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilos.css">
+  <style>
+    /* Estilo simples das informações */
+    .info-section {
+      background: #f8f9fa;
+      border: 1px solid #e9ecef;
+      border-radius: 13px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .info-section h3 {
+      color: #333;
+      margin-bottom: 15px;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .info-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      color: #333;
+      font-size: 16px;
+    }
+
+    .info-item strong {
+      min-width: 120px;
+      color: #6b4c9a;
+      font-weight: 600;
+    }
+
+    /* Botão voltar */
+    .voltar-btn {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      background: #6b4c9a;
+      color: white;
+      border: none;
+      border-radius: 13px;
+      font-size: 17px;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Menu lateral -->
+  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+  <div class="sidebar" id="sidebar">
+    <h3>Menu</h3>
+    <a href="telaagendamento.html">📅 Reservar Sala</a>
+    <a href="telabusca.html">🔍 Buscar Salas</a>
+    <a href="telaperfil.html">👤 Perfil</a>
+    <a href="meusagendamentos.html">📋 Registro</a>
+    <a href="telasuporte.html">💬 Suporte</a>
+  </div>
+
+  <!-- Conteúdo da página -->
+  <div class="container">
+    <h2>Detalhes da Sala</h2>
+
+    <!-- Info geral -->
+    <div class="info-section">
+      <h3>Informações</h3>
+      <div class="info-item">
+        <strong>Nome:</strong>
+        <span id="nomeSala">Lab 1 - Informática</span>
+      </div>
+      <div class="info-item">
+        <strong>Capacidade:</strong>
+        <span>30 pessoas</span>
+      </div>
+      <div class="info-item">
+        <strong>Local:</strong>
+        <span>Bloco A - 1º Andar</span>
+      </div>
+      <div class="info-item">
+        <strong>Equipamentos:</strong>
+        <span>Computadores, Projetor, Ar Condicionado</span>
+      </div>
+    </div>
+
+    <!-- Botão voltar -->
+    <a href="javascript:history.back()" class="voltar-btn">Voltar</a>
+  </div>
+
+  <script>
+    // Função do menu
+    function toggleMenu() {
+      const sidebar = document.getElementById('sidebar');
+      sidebar.classList.toggle('active');
+    }
+
+    // Pega o nome da sala da URL (como um estudante faria)
+    window.addEventListener('DOMContentLoaded', function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const sala = urlParams.get('sala');
+      
+      if (sala) {
+        document.getElementById('nomeSala').textContent = sala;
+      }
+    });
+  </script>
+</body>
+</html> 

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Buscar Salas - LabAgenda</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilos.css">
+  <style>
+    /* Estilo da lista de salas */
+    .sala-item {
+      background: #f8f9fa;
+      border: 1px solid #e9ecef;
+      border-radius: 13px;
+      padding: 20px;
+      margin-bottom: 15px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .sala-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .sala-item h3 {
+      color: #6b4c9a;
+      margin: 0 0 10px 0;
+      font-size: 18px;
+    }
+
+    .sala-info {
+      display: flex;
+      gap: 20px;
+      color: #666;
+      font-size: 14px;
+    }
+
+    .sala-info span {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .busca-container {
+      background: #f8f9fa;
+      border: 1px solid #e9ecef;
+      border-radius: 13px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .busca-container input {
+      margin-bottom: 15px;
+    }
+
+    .btn-buscar {
+      background: #6b4c9a;
+      color: white;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <!-- Menu lateral -->
+  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+  <div class="sidebar" id="sidebar">
+    <h3>Menu</h3>
+    <a href="telaagendamento.html">📅 Reservar Sala</a>
+    <a href="telaperfil.html">👤 Perfil</a>
+    <a href="meusagendamentos.html">📋 Registro</a>
+    <a href="telasuporte.html">💬 Suporte</a>
+  </div>
+
+  <!-- Conteúdo da página -->
+  <div class="container">
+    <h2>Buscar Agendamentos</h2>
+
+    <!-- Busca por data -->
+    <div class="busca-container">
+      <label for="data">Escolha uma data:</label>
+      <input type="date" id="data">
+      <button class="btn-buscar" onclick="buscarAgendamentos()">🔍 Buscar Agendamentos</button>
+    </div>
+
+    <!-- Lista de salas agendadas -->
+    <div id="listaAgendamentos" style="display: none;">
+      <h3>Agendamentos encontrados:</h3>
+      
+      <div class="sala-item" onclick="window.location.href='teladetalhesdasala.html?sala=Sala 101 - Teoria'">
+        <h3>Sala 101 - Teoria</h3>
+        <div class="sala-info">
+          <span>⏰ 14:00 - 16:00</span>
+          <span>👥 40 pessoas</span>
+          <span>✅ Agendado</span>
+        </div>
+      </div>
+
+      <div class="sala-item" onclick="window.location.href='teladetalhesdasala.html?sala=Lab 2 - Informática'">
+        <h3>Lab 2 - Informática</h3>
+        <div class="sala-info">
+          <span>⏰ 08:00 - 10:00</span>
+          <span>👥 25 pessoas</span>
+          <span>✅ Agendado</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="semResultados" style="display: none; text-align: center; color: #666; font-style: italic; margin-top: 30px;">
+      Nenhum agendamento encontrado para esta data.
+    </div>
+  </div>
+
+  <script>
+    // Função do menu
+    function toggleMenu() {
+      const sidebar = document.getElementById('sidebar');
+      sidebar.classList.toggle('active');
+    }
+
+    // Configura a data
+    window.addEventListener("DOMContentLoaded", function() {
+      const inputData = document.getElementById("data");
+      const hoje = new Date();
+      
+      const ano = hoje.getFullYear();
+      const mes = String(hoje.getMonth() + 1).padStart(2, '0');
+      const dia = String(hoje.getDate()).padStart(2, '0');
+      
+      // Define a data mínima como hoje
+      inputData.min = `${ano}-${mes}-${dia}`;
+      // Define a data máxima como o final do ano atual
+      inputData.max = `${ano}-12-31`;
+      
+      // Define a data padrão como hoje
+      inputData.value = `${ano}-${mes}-${dia}`;
+    });
+
+    // Função pra buscar agendamentos
+    function buscarAgendamentos() {
+      const data = document.getElementById("data").value;
+      const lista = document.getElementById("listaAgendamentos");
+      const semResultados = document.getElementById("semResultados");
+
+      if (!data) {
+        console.log("Escolha uma data primeiro!");
+        return;
+      }
+
+      // Simula busca (como um estudante faria)
+      if (data === "2024-06-10") {
+        lista.style.display = "block";
+        semResultados.style.display = "none";
+      } else {
+        // Para outras datas, mostra um exemplo
+        lista.style.display = "block";
+        semResultados.style.display = "none";
+      }
+    }
+
+  </script>
+</body>
+</html> 

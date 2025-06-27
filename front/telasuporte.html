@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Suporte - LabAgenda</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilos.css">
+  <style>
+    /* Estilo do formulário de suporte */
+    .suporte-form {
+      background: #f8f9fa;
+      border: 1px solid #e9ecef;
+      border-radius: 13px;
+      padding: 23px;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: #333;
+      font-weight: 600;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 15px;
+      font-family: 'Nunito', sans-serif;
+    }
+
+    .form-group textarea {
+      height: 120px;
+      resize: vertical;
+    }
+
+    .form-group select {
+      background-color: white;
+    }
+
+    .btn-enviar {
+      background: #6b4c9a;
+      color: white;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .contato-info {
+      background: #f8f9fa;
+      border: 1px solid #e9ecef;
+      border-radius: 13px;
+      padding: 23px;
+      margin-top: 30px;
+    }
+
+    .contato-info h3 {
+      color: #333;
+      margin-bottom: 15px;
+      font-size: 18px;
+    }
+
+    .contato-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <!-- Menu lateral -->
+  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+  <div class="sidebar" id="sidebar">
+    <h3>Menu</h3>
+    <a href="telaagendamento.html">📅 Reservar Sala</a>
+    <a href="telabusca.html">🔍 Buscar Salas</a>
+    <a href="telaperfil.html">👤 Perfil</a>
+    <a href="meusagendamentos.html">📋 Registro</a>
+  </div>
+
+  <!-- Conteúdo da página -->
+  <div class="container">
+    <h2>Suporte</h2>
+
+    <div class="suporte-form">
+      <form id="suporteForm">
+        <div class="form-group">
+          <label for="assunto">Assunto</label>
+          <select id="assunto" required>
+            <option value="">Selecione o assunto</option>
+            <option value="problema">Problema com Agendamento</option>
+            <option value="sugestao">Sugestão de Melhoria</option>
+            <option value="duvida">Dúvida sobre o Sistema</option>
+            <option value="outro">Outro</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="mensagem">Mensagem</label>
+          <textarea id="mensagem" placeholder="Descreva seu problema ou dúvida..." required></textarea>
+        </div>
+
+        <button type="submit" class="btn-enviar">Enviar Mensagem</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Função do menu
+    function toggleMenu() {
+      const sidebar = document.getElementById('sidebar');
+      sidebar.classList.toggle('active');
+    }
+
+    // Função pra enviar mensagem
+    document.getElementById('suporteForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const assunto = document.getElementById('assunto').value;
+      const mensagem = document.getElementById('mensagem').value;
+
+      // TODO: Implementar envio da mensagem
+      console.log('Mensagem enviada com sucesso! Em breve entraremos em contato.');
+      
+      // Limpa o formulário
+      this.reset();
+    });
+
+
+  </script>
+</body>
+</html>

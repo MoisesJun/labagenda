@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Meus Agendamentos - LabAgenda</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilos.css">
+  <style>
+    /* Estilo da lista de agendamentos */
+    .agendamento-item {
+      background: #f8f9fa;
+      border: 1px solid #e9ecef;
+      border-radius: 13px;
+      padding: 20px;
+      margin-bottom: 15px;
+    }
+
+    .agendamento-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .agendamento-header h3 {
+      color: #6b4c9a;
+      margin: 0;
+      font-size: 18px;
+    }
+
+    .agendamento-info {
+      display: flex;
+      gap: 20px;
+      color: #666;
+      font-size: 14px;
+    }
+
+    .agendamento-info span {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .agendamento-acoes {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .btn {
+      padding: 8px 15px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn-cancelar {
+      background: #dc3545;
+      color: white;
+    }
+
+    .btn-detalhes {
+      background: #6b4c9a;
+      color: white;
+    }
+
+    .sem-agendamentos {
+      text-align: center;
+      color: #666;
+      font-style: italic;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Menu lateral -->
+  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+  <div class="sidebar" id="sidebar">
+    <h3>Menu</h3>
+    <a href="telaagendamento.html">📅 Reservar Sala</a>
+    <a href="telabusca.html">🔍 Buscar Salas</a>
+    <a href="telaperfil.html">👤 Perfil</a>
+    <a href="telasuporte.html">💬 Suporte</a>
+  </div>
+
+  <!-- Conteúdo da página -->
+  <div class="container">
+    <h2>Meus Agendamentos</h2>
+
+    <div id="listaAgendamentos">
+      <div class="agendamento-item">
+        <div class="agendamento-header">
+          <h3>Lab 1 - Informática</h3>
+          <span class="status">✅ Confirmado</span>
+        </div>
+        <div class="agendamento-info">
+          <span>📅 10/06/2024</span>
+          <span>⏰ 08:00 - 10:00</span>
+          <span>👥 30 pessoas</span>
+        </div>
+        <div class="agendamento-acoes">
+          <button class="btn btn-detalhes" onclick="verDetalhes('Lab1')">Ver Detalhes</button>
+          <button class="btn btn-cancelar" onclick="cancelarAgendamento('Lab1')">Cancelar</button>
+        </div>
+      </div>
+
+      <div class="agendamento-item">
+        <div class="agendamento-header">
+          <h3>Sala 101 - Teoria</h3>
+          <span class="status">✅ Confirmado</span>
+        </div>
+        <div class="agendamento-info">
+          <span>📅 12/06/2024</span>
+          <span>⏰ 14:00 - 16:00</span>
+          <span>👥 20 pessoas</span>
+        </div>
+        <div class="agendamento-acoes">
+          <button class="btn btn-detalhes" onclick="verDetalhes('Sala101')">Ver Detalhes</button>
+          <button class="btn btn-cancelar" onclick="cancelarAgendamento('Sala101')">Cancelar</button>
+        </div>
+      </div>
+
+      <div class="agendamento-item">
+        <div class="agendamento-header">
+          <h3>Lab 3 - Programação</h3>
+          <span class="status">✅ Realizado</span>
+        </div>
+        <div class="agendamento-info">
+          <span>📅 05/06/2024</span>
+          <span>⏰ 10:00 - 12:00</span>
+          <span>👥 15 pessoas</span>
+        </div>
+        <div class="agendamento-acoes">
+          <button class="btn btn-detalhes" onclick="verDetalhes('Lab3')">Ver Detalhes</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="semAgendamentos" class="sem-agendamentos" style="display: none;">
+      Você ainda não tem agendamentos.
+    </div>
+  </div>
+
+  <script>
+    // Função do menu
+    function toggleMenu() {
+      const sidebar = document.getElementById('sidebar');
+      sidebar.classList.toggle('active');
+    }
+
+    // Função pra ver detalhes
+    function verDetalhes(sala) {
+      window.location.href = `teladetalhesdasala.html?sala=${encodeURIComponent(sala)}`;
+    }
+
+    // Função pra cancelar agendamento
+    function cancelarAgendamento(sala) {
+      if (confirm('Tem certeza que quer cancelar este agendamento?')) {
+        // Remove o agendamento da lista (como um estudante faria)
+        // TODO: no futuro, isso vai salvar no banco de dados
+        const agendamento = event.target.closest('.agendamento-item');
+        agendamento.remove();
+        
+        // Verifica se ainda tem agendamentos
+        verificarAgendamentos();
+      }
+    }
+
+    // Função pra verificar se tem agendamentos
+    function verificarAgendamentos() {
+      const lista = document.getElementById('listaAgendamentos');
+      const semAgendamentos = document.getElementById('semAgendamentos');
+      
+      // Se não tem mais agendamentos, mostra a mensagem
+      if (lista.children.length === 0) {
+        lista.style.display = 'none';
+        semAgendamentos.style.display = 'block';
+      }
+    }
+
+    // Verifica ao carregar a página
+    window.onload = verificarAgendamentos;
+
+  </script>
+</body>
+</html>
