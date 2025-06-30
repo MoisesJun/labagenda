@@ -5,66 +5,6 @@
   <title>Buscar Salas - LabAgenda</title>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="estilos.css">
-  <style>
-    /* Estilo da lista de salas */
-    .sala-item {
-      background: #f8f9fa;
-      border: 1px solid #e9ecef;
-      border-radius: 13px;
-      padding: 20px;
-      margin-bottom: 15px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .sala-item:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-
-    .sala-item h3 {
-      color: #6b4c9a;
-      margin: 0 0 10px 0;
-      font-size: 18px;
-    }
-
-    .sala-info {
-      display: flex;
-      gap: 20px;
-      color: #666;
-      font-size: 14px;
-    }
-
-    .sala-info span {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .busca-container {
-      background: #f8f9fa;
-      border: 1px solid #e9ecef;
-      border-radius: 13px;
-      padding: 20px;
-      margin-bottom: 20px;
-    }
-
-    .busca-container input {
-      margin-bottom: 15px;
-    }
-
-    .btn-buscar {
-      background: #6b4c9a;
-      color: white;
-      padding: 12px 25px;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      width: 100%;
-    }
-  </style>
 </head>
 <body>
   <!-- Menu lateral -->
@@ -80,7 +20,7 @@
 
   <!-- Conteúdo da página -->
   <div class="container">
-    <h2>Buscar Agendamentos</h2>
+    <h2><span>Buscar Agendamentos</span></h2>
 
     <!-- Busca por data -->
     <div class="busca-container">
@@ -112,7 +52,7 @@
       </div>
     </div>
 
-    <div id="semResultados" style="display: none; text-align: center; color: #666; font-style: italic; margin-top: 30px;">
+    <div id="semResultados" class="sem-resultados" style="display: none;">
       Nenhum agendamento encontrado para esta data.
     </div>
   </div>
@@ -121,7 +61,10 @@
     // Função do menu
     function toggleMenu() {
       const sidebar = document.getElementById('sidebar');
+      const menuToggle = document.querySelector('.menu-toggle');
+      
       sidebar.classList.toggle('active');
+      menuToggle.classList.toggle('active');
     }
 
     // Configura a data
@@ -153,7 +96,7 @@
         return;
       }
 
-      // Simula busca (como um estudante faria)
+      // Simula busca
       if (data === "2024-06-10") {
         lista.style.display = "block";
         semResultados.style.display = "none";

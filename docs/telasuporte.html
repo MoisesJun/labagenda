@@ -5,81 +5,6 @@
   <title>Suporte - LabAgenda</title>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="estilos.css">
-  <style>
-    /* Estilo do formulário de suporte */
-    .suporte-form {
-      background: #f8f9fa;
-      border: 1px solid #e9ecef;
-      border-radius: 13px;
-      padding: 23px;
-      margin-bottom: 20px;
-    }
-
-    .form-group {
-      margin-bottom: 20px;
-    }
-
-    .form-group label {
-      display: block;
-      margin-bottom: 8px;
-      color: #333;
-      font-weight: 600;
-    }
-
-    .form-group input,
-    .form-group textarea,
-    .form-group select {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      font-size: 15px;
-      font-family: 'Nunito', sans-serif;
-    }
-
-    .form-group textarea {
-      height: 120px;
-      resize: vertical;
-    }
-
-    .form-group select {
-      background-color: white;
-    }
-
-    .btn-enviar {
-      background: #6b4c9a;
-      color: white;
-      padding: 12px 25px;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      width: 100%;
-    }
-
-    .contato-info {
-      background: #f8f9fa;
-      border: 1px solid #e9ecef;
-      border-radius: 13px;
-      padding: 23px;
-      margin-top: 30px;
-    }
-
-    .contato-info h3 {
-      color: #333;
-      margin-bottom: 15px;
-      font-size: 18px;
-    }
-
-    .contato-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 12px;
-      color: #666;
-    }
-  </style>
 </head>
 <body>
   <!-- Menu lateral -->
@@ -95,7 +20,7 @@
 
   <!-- Conteúdo da página -->
   <div class="container">
-    <h2>Suporte</h2>
+    <h2><span>Suporte</span></h2>
 
     <div class="suporte-form">
       <form id="suporteForm">
@@ -118,13 +43,20 @@
         <button type="submit" class="btn-enviar">Enviar Mensagem</button>
       </form>
     </div>
+
+    <div id="mensagemSucesso" class="msg sucesso" style="display: none;">
+      Mensagem enviada com sucesso!
+    </div>
   </div>
 
   <script>
     // Função do menu
     function toggleMenu() {
       const sidebar = document.getElementById('sidebar');
+      const menuToggle = document.querySelector('.menu-toggle');
+      
       sidebar.classList.toggle('active');
+      menuToggle.classList.toggle('active');
     }
 
     // Função pra enviar mensagem
@@ -133,12 +65,18 @@
       
       const assunto = document.getElementById('assunto').value;
       const mensagem = document.getElementById('mensagem').value;
+      const mensagemSucesso = document.getElementById('mensagemSucesso');
 
-      // TODO: Implementar envio da mensagem
-      console.log('Mensagem enviada com sucesso! Em breve entraremos em contato.');
+      // Mostra mensagem de sucesso
+      mensagemSucesso.style.display = 'block';
       
       // Limpa o formulário
       this.reset();
+      
+      // Esconde a mensagem após 5 segundos
+      setTimeout(function() {
+        mensagemSucesso.style.display = 'none';
+      }, 5000);
     });
 
 

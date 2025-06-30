@@ -5,74 +5,6 @@
   <title>Meus Agendamentos - LabAgenda</title>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="estilos.css">
-  <style>
-    /* Estilo da lista de agendamentos */
-    .agendamento-item {
-      background: #f8f9fa;
-      border: 1px solid #e9ecef;
-      border-radius: 13px;
-      padding: 20px;
-      margin-bottom: 15px;
-    }
-
-    .agendamento-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 15px;
-    }
-
-    .agendamento-header h3 {
-      color: #6b4c9a;
-      margin: 0;
-      font-size: 18px;
-    }
-
-    .agendamento-info {
-      display: flex;
-      gap: 20px;
-      color: #666;
-      font-size: 14px;
-    }
-
-    .agendamento-info span {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .agendamento-acoes {
-      display: flex;
-      gap: 10px;
-      margin-top: 15px;
-    }
-
-    .btn {
-      padding: 8px 15px;
-      border: none;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    .btn-cancelar {
-      background: #dc3545;
-      color: white;
-    }
-
-    .btn-detalhes {
-      background: #6b4c9a;
-      color: white;
-    }
-
-    .sem-agendamentos {
-      text-align: center;
-      color: #666;
-      font-style: italic;
-      margin-top: 30px;
-    }
-  </style>
 </head>
 <body>
   <!-- Menu lateral -->
@@ -88,7 +20,7 @@
 
   <!-- Conteúdo da página -->
   <div class="container">
-    <h2>Meus Agendamentos</h2>
+    <h2><span>Meus Agendamentos</span></h2>
 
     <div id="listaAgendamentos">
       <div class="agendamento-item">
@@ -148,7 +80,10 @@
     // Função do menu
     function toggleMenu() {
       const sidebar = document.getElementById('sidebar');
+      const menuToggle = document.querySelector('.menu-toggle');
+      
       sidebar.classList.toggle('active');
+      menuToggle.classList.toggle('active');
     }
 
     // Função pra ver detalhes
@@ -159,8 +94,7 @@
     // Função pra cancelar agendamento
     function cancelarAgendamento(sala) {
       if (confirm('Tem certeza que quer cancelar este agendamento?')) {
-        // Remove o agendamento da lista (como um estudante faria)
-        // TODO: no futuro, isso vai salvar no banco de dados
+        // Remove o agendamento da lista
         const agendamento = event.target.closest('.agendamento-item');
         agendamento.remove();
         

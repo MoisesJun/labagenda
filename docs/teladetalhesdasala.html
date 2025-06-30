@@ -5,54 +5,6 @@
   <title>Detalhes da Sala - LabAgenda</title>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="estilos.css">
-  <style>
-    /* Estilo simples das informações */
-    .info-section {
-      background: #f8f9fa;
-      border: 1px solid #e9ecef;
-      border-radius: 13px;
-      padding: 20px;
-      margin-bottom: 20px;
-    }
-
-    .info-section h3 {
-      color: #333;
-      margin-bottom: 15px;
-      font-size: 18px;
-      font-weight: 600;
-    }
-
-    .info-item {
-      display: flex;
-      align-items: center;
-      margin-bottom: 10px;
-      color: #333;
-      font-size: 16px;
-    }
-
-    .info-item strong {
-      min-width: 120px;
-      color: #6b4c9a;
-      font-weight: 600;
-    }
-
-    /* Botão voltar */
-    .voltar-btn {
-      display: block;
-      width: 100%;
-      padding: 15px;
-      background: #6b4c9a;
-      color: white;
-      border: none;
-      border-radius: 13px;
-      font-size: 17px;
-      font-weight: 600;
-      cursor: pointer;
-      text-align: center;
-      text-decoration: none;
-      margin-top: 20px;
-    }
-  </style>
 </head>
 <body>
   <!-- Menu lateral -->
@@ -69,7 +21,7 @@
 
   <!-- Conteúdo da página -->
   <div class="container">
-    <h2>Detalhes da Sala</h2>
+    <h2><span>Detalhes da Sala</span></h2>
 
     <!-- Info geral -->
     <div class="info-section">
@@ -100,10 +52,13 @@
     // Função do menu
     function toggleMenu() {
       const sidebar = document.getElementById('sidebar');
+      const menuToggle = document.querySelector('.menu-toggle');
+      
       sidebar.classList.toggle('active');
+      menuToggle.classList.toggle('active');
     }
 
-    // Pega o nome da sala da URL (como um estudante faria)
+    // Pega o nome da sala da URL
     window.addEventListener('DOMContentLoaded', function() {
       const urlParams = new URLSearchParams(window.location.search);
       const sala = urlParams.get('sala');
